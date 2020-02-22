@@ -23,6 +23,173 @@
         helloMsg()
     }
 
+    LightValidator.prototype.validate = function(callback) {
+        const _ = this;
+        const form = _.form
+
+        onKeyUp(form);
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault()
+
+            if (formHasError(form)) {
+                throwError(`Form has error`)
+            }
+
+            const formDatas = serializeForm(form)
+
+            if (callback && typeof(callback) === "function") {
+                callback(formDatas)
+            }
+
+            return formDatas;
+        })
+    }
+
+    /**
+     * 
+     * 
+     * @param {Node} form 
+     * @return {Boolean}
+     */
+    const formHasError = form => {
+        var errorList = [];
+
+        loopElements(form, element => {
+            errorList.push(processFielValidation(element, false));
+        })
+
+        return errorList.indexOf(true) !== -1;
+    }
+
+    /**
+     * Loops all form elements and process item in the given callback function
+     * 
+     * @param {Node} form 
+     * @param {Function} callback A callback function
+     */
+    const loopElements = (form, callback) => {
+        getElements(form).forEach(element => {
+            callback(element)
+        });
+    }
+
+    const getFormChildren = (form, type, selector) => {
+        return form[`querySelector${type}`](selector);
+    }
+
+    const getElements = form => {
+        return getFormChildren(form, 'All', '[name]');
+    }
+
+    const getSubmitButton = form => {
+        return getFormChildren(form, '', '[type="submit"]');
+    }
+
+    const processFielValidation = (element, checkError) => {
+        const $parent = element.closest('div');
+
+        if (element.required) {
+            if (element.value === '') {
+                element.classList.add('invalid-field');
+                $parent.classList.add('invalid-field-wrapper');
+
+                showInvalidMessage($parent, element.name);
+
+                if (checkError !== undefined) {
+                    checkError = true;
+                }
+            } else {
+                $parent.classList.remove('invalid-field-wrapper');
+                element.classList.remove('invalid-field');
+
+                if (element.type === 'email') {
+                    if (!validEmail(element.value)) {
+                        showInvalidMessage($parent, '', "L'addresse email n'est pas valide");
+                    } else {
+                        removeInvalidMessage($parent);
+                    }
+                } else {
+                    removeInvalidMessage($parent);
+                }
+            }
+        }
+
+        return checkError;
+    }
+
+    /**
+     * Trigger form validation on form element KeyUp
+     * 
+     * @param {Node} form The form node
+     */
+    function onKeyUp(form) {
+        loopElements(form, function(element) {
+            element.onkeyup = function () {
+                processFielValidation(this);
+            }
+        })
+    }
+
+    /**
+     * Serializes form
+     * 
+     * @param {Node} form The form node
+     * @return {Object} The form datas { name: value }
+     */
+    const serializeForm = form => {
+        const serialized = {};
+
+        loopElements(form, element => {
+            serialized[element.name] = element.value;
+        })
+
+        return serialized;
+    }
+
+    /**
+     * Resets form elements
+     * 
+     * @param {Node} form The form node
+     */
+    const reset = form => {
+        loopElements(form, element => {
+            switch (element.tagName.toLowerCase()) {
+                case 'select':
+                    element.querySelector('option').selected = 'selected';
+                    break;
+                default:
+                    element.value = '';
+            }
+        })
+    }
+
+    function removeInvalidMessage(parent) {
+        const $invalidMessage = getFormChildren(parent, '', '.invalid-message');
+
+        if ($invalidMessage) {
+            $invalidMessage.parentNode.removeChild($invalidMessage);
+        }
+    }
+    
+    function showInvalidMessage(parent, fieldName, custom) {
+        removeInvalidMessage(parent);
+
+        const div = document.createElement('div');
+
+        div.classList.add('invalid-message');
+
+        if (custom) {
+            div.innerHTML = custom;
+        } else {
+            div.innerHTML = `Le champ <em>${fieldName}</em> est obligatoire.`;
+        }
+
+        parent.appendChild(div);
+    }
+
+    const validEmail = value => /^.+@.+\..{2,}$/.test(value)
+
     function verifyOptions() {
         const formId = this.options.id
 
