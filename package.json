@@ -1,0 +1,9 @@
+{
+  "name": "lightformvalidator",
+  "version": "1.0.0",
+  "description": "Light form validator using no library",
+  "main": "index.js",
+  "repository": "https://github.com/balzacLeGeek/lightformvalidator",
+  "author": "balzacLeGeek (https://github.com/balzacLeGeek)",
+  "license": "MIT"
+}
