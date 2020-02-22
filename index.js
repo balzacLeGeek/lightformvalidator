@@ -40,6 +40,12 @@
             throwError(`Form with id "${formId}" not found`)
         }
 
+        const nodeName = formNode.nodeName.toLowerCase()
+
+        if (nodeName !== 'form') {
+            throwError(`LightValidator element must be a <form>, <${ nodeName }> given`)
+        }
+
         return formNode
     }
 
