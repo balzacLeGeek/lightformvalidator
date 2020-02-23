@@ -42,16 +42,24 @@ Process the form validation and pass the `Serialized form datas` to a callback f
 
 ### Console is your friend
 - ***❌ Form with id "YOUR_FORM_ID" not found***
+You have provided a wrong id
 <p align="left">
 	<img src="assets/imgs/ERROR_FORM_NODE_NOT_FOUND.jpg">
 </p>
 
+- ***❌ Invalid Node Element***
+The given ID doesn't match to any **form** element.
+<p align="left">
+	<img src="assets/imgs/ERROR_NODE_INVALID.jpg">
+</p>
+
 - ***❌ Form has error***
+One or more required fields are not valid
 <p align="left">
 	<img src="assets/imgs/ERROR_FORM_HAS_ERROR.jpg">
 </p>
 
-- ***🥳 Everything is OK ***
+- **🥳 Everything is OK**
 <p align="left">
 	<img src="assets/imgs/EVERYTHING_IS_OK.jpg">
 </p>
