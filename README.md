@@ -119,9 +119,9 @@ const myFormDatas = myForm.validate()
 - [ ] Password confirmation validation
 
 ## Credits
-[Light Form Validator][1] was inspired by an old code of my friend [Rado]([https://github.com/radonirinamaminiaina](https://github.com/radonirinamaminiaina)).
+[Light Form Validator][1] was inspired by an old code of my friend [Rado](https://github.com/radonirinamaminiaina).
 
-Light Form Validator logo fond was picked from [Champagne & Limousines]([https://www.dafont.com/fr/champagne-limousines.font](https://www.dafont.com/fr/champagne-limousines.font)) (Dafont).
+Light Form Validator logo fond was picked from [Champagne & Limousines](https://www.dafont.com/fr/champagne-limousines.font) (Dafont).
 
 ## License
 MIT
