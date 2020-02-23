@@ -42,13 +42,19 @@ Process the form validation and pass the `Serialized form datas` to a callback f
 
 ### Console is your friend
 - ***❌ Form with id "YOUR_FORM_ID" not found***
-![You have passed a wrong form ID in your options](assets/imgs/ERROR_FORM_NODE_NOT_FOUND.jpg)
+<p align="left">
+	<img src="assets/imgs/ERROR_FORM_NODE_NOT_FOUND.jpg">
+</p>
 
 - ***❌ Form has error***
-![One ore more required fields are empty or not valid](assets/imgs/ERROR_FORM_HAS_ERROR.jpg)
+<p align="left">
+	<img src="assets/imgs/ERROR_FORM_HAS_ERROR.jpg">
+</p>
 
 - ***🥳 Everything is OK ***
-![LightValidator has been instancied](assets/imgs/EVERYTHING_IS_OK.jpg)
+<p align="left">
+	<img src="assets/imgs/EVERYTHING_IS_OK.jpg">
+</p>
 
 ## Usage example
 The following HTML code uses boostrap form.
