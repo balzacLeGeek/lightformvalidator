@@ -104,8 +104,10 @@
                 element.classList.remove('invalid-field');
 
                 if (element.type === 'email') {
-                    if (!validEmail(element.value)) {
-                        showInvalidMessage($parent, '', "L'addresse email n'est pas valide");
+                    const emailValue = element.value
+
+                    if (!validEmail(emailValue)) {
+                        showInvalidMessage($parent, '', `<strong><em>${ emailValue }</em></strong> is not an email address valid`);
                     } else {
                         removeInvalidMessage($parent);
                     }
@@ -179,11 +181,7 @@
 
         div.classList.add('invalid-message');
 
-        if (custom) {
-            div.innerHTML = custom;
-        } else {
-            div.innerHTML = `Le champ <em>${fieldName}</em> est obligatoire.`;
-        }
+        div.innerHTML = custom ? custom : `<strong><em>${fieldName}</em></strong> is required.`;
 
         parent.appendChild(div);
     }
