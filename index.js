@@ -94,7 +94,7 @@
                 element.classList.add('invalid-field');
                 $parent.classList.add('invalid-field-wrapper');
 
-                showInvalidMessage(element, $parent, element.name);
+                showInvalidMessage($parent, element.name);
 
                 if (checkError !== undefined) {
                     checkError = true;
@@ -107,12 +107,12 @@
                     const emailValue = element.value
 
                     if (!validEmail(emailValue)) {
-                        showInvalidMessage(element, $parent, '', `<strong><em>${ emailValue }</em></strong> is not an email address valid`);
+                        showInvalidMessage($parent, '', `<strong><em>${ emailValue }</em></strong> is not an email address valid`);
                     } else {
-                        removeInvalidMessage(element, $parent);
+                        removeInvalidMessage($parent);
                     }
                 } else {
-                    removeInvalidMessage(element, $parent);
+                    removeInvalidMessage($parent);
                 }
             }
         }
@@ -170,27 +170,16 @@
         })
     }
 
-    function removeInvalidMessage(element, parent) {
-        removeErrorAttribute(element)
-
+    function removeInvalidMessage(parent) {
         const $invalidMessage = getFormChildren(parent, '', '.invalid-message');
 
         if ($invalidMessage) {
             $invalidMessage.parentNode.removeChild($invalidMessage);
         }
     }
-
-    const addErrorAttribute = (element) => {
-        element.setAttribute('data-has-error', true)
-    }
-
-    const removeErrorAttribute = (element) => {
-        element.removeAttribute("data-has-error");
-    }
-
-    function showInvalidMessage(element, parent, fieldName, custom) {
-        addErrorAttribute(element)
-        removeInvalidMessage(element, parent);
+    
+    function showInvalidMessage(parent, fieldName, custom) {
+        removeInvalidMessage(parent);
 
         const div = document.createElement('div');
 
