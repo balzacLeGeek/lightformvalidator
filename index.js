@@ -143,7 +143,11 @@
         const serialized = {};
 
         loopElements(form, element => {
-            serialized[element.name] = element.value;
+            const elementType = element.type
+
+            if ((elementType === 'radio' && element.checked) || elementType !== 'radio') {
+                serialized[element.name] = element.value;
+            }
         })
 
         return serialized;
