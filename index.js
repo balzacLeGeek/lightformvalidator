@@ -101,10 +101,6 @@
     return getFormChildren(form, "All", "[name]");
   };
 
-  const getSubmitButton = form => {
-    return getFormChildren(form, "", '[type="submit"]');
-  };
-
   const processFielValidation = (element, checkError) => {
     const $parent = element.closest("div");
 
