@@ -48,6 +48,22 @@
       });
     });
   };
+  /**
+   * Resets form elements
+   *
+   * @param {Node} form The form node
+   */
+  LightValidator.prototype.reset = form => {
+    loopElements(form, element => {
+      switch (element.tagName.toLowerCase()) {
+        case "select":
+          element.querySelector("option").selected = "selected";
+          break;
+        default:
+          element.value = "";
+      }
+    });
+  };
 
   /**
    *
@@ -163,23 +179,6 @@
     return serialized;
   };
 
-  /**
-   * Resets form elements
-   *
-   * @param {Node} form The form node
-   */
-  const reset = form => {
-    loopElements(form, element => {
-      switch (element.tagName.toLowerCase()) {
-        case "select":
-          element.querySelector("option").selected = "selected";
-          break;
-        default:
-          element.value = "";
-      }
-    });
-  };
-
   function removeInvalidMessage(parent) {
     const $invalidMessage = getFormChildren(parent, "", ".invalid-message");
 
@@ -190,14 +189,19 @@
 
   function showInvalidMessage(parent, fieldName, custom) {
     const div = document.createElement("div");
+    const userMessageError = parent.querySelector("[data-error]");
 
     removeInvalidMessage(parent);
 
     div.classList.add("invalid-message");
 
-    div.innerHTML = custom
-      ? custom
-      : `<strong><em>${fieldName}</em></strong> is required.`;
+    if (userMessageError) {
+      div.textContent = userMessageError.dataset.error;
+    } else {
+      div.innerHTML = custom
+        ? custom
+        : `<strong><em>${fieldName}</em></strong> is required.`;
+    }
 
     parent.appendChild(div);
   }
