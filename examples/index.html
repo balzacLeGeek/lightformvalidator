@@ -15,7 +15,7 @@
           id="name"
           class="form-control"
           placeholder="Enter your fullname"
-          data-error="Please enter your name"
+          data-error="Please enter your name [custom error]"
           required
         />
       </div>
@@ -78,8 +78,8 @@
     <script src="../index.js"></script>
     <script>
       // Create an instance of the LightValidator
-      const myForm = new LightValidator({
-        id: "myForm" // Oour form id's
+      const myForm = new LightValidator("myForm", {
+        // option goes here
       });
 
       // Use validate() method to process validation

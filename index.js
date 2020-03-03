@@ -6,22 +6,19 @@
   const ERR_MSG_FORM_ID_MISSED = '"id: YOUR_FORM_ID" option must be defined';
 
   // Ligth Form Validator constructor
-  this.LightValidator = function() {
+  this.LightValidator = function(element, options) {
     const defaultOptions = {
-      id: null,
       className: "light-validator"
       // Future options goes here
     };
 
+    this.element = element;
     // Plugin options
     // Create options by extending defaultOptions with the passed in arugments, assing defaultOptions otherwise
-    this.options =
-      arguments[0] && typeof arguments[0] === "object"
-        ? extendDefaultOptions(defaultOptions, arguments[0])
-        : defaultOptions;
+    this.options = extendDefaultOptions(defaultOptions, options);
 
     if (verifyOptions.call(this)) {
-      this.form = getForm(this.options.id);
+      this.form = getForm(element);
     }
 
     helloMsg();
@@ -205,7 +202,7 @@
   const validEmail = value => /^.+@.+\..{2,}$/.test(value);
 
   function verifyOptions() {
-    const formId = this.options.id;
+    const formId = this.element;
 
     if (!formId) {
       throwError(ERR_MSG_FORM_ID_MISSED);

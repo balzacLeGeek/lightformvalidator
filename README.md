@@ -151,8 +151,8 @@ The following HTML code uses boostrap form.
 
 ```javascript
 // Create an instance of the LightValidator
-const myForm = new LightValidator({
-	id: 'myForm', // Oour form id's
+const myForm = new LightValidator('myForm', {
+	className: string | default: 'light-validator'
 })
 
 // Use validate() method to process validation
@@ -160,6 +160,25 @@ myForm.validate().then((datas)  => {
 	// Your callback function
 	// Ex: Send `datas` object within a POST request
 }))
+```
+
+## Usage example with custom error
+
+To add a custom error, you need to add `data-error` attribute to the field.
+
+```html
+<div class="form-group">
+  <label for="name">Fullname</label>
+  <input
+    type="text"
+    name="name"
+    id="name"
+    class="form-control"
+    placeholder="Enter your fullname"
+    data-error="Please enter your name"
+    required
+  />
+</div>
 ```
 
 ## TODO
