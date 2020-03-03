@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="myForm" novalidate>
+      <div class="form-group">
+        <label for="name">Fullname</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="form-control"
+          placeholder="Enter your fullname"
+          data-error="Please enter your name [custom error]"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          id="email"
+          placeholder="Enter email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          id="password"
+          placeholder="Password"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="sexe">Gender</label>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            class="custom-control-input"
+            type="radio"
+            id="gender-mr"
+            name="gender"
+            value="mr"
+            checked
+          />
+          <label class="custom-control-label" for="gender-mr">Mr</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input
+            class="custom-control-input"
+            type="radio"
+            id="gender-mme"
+            name="gender"
+            value="mme"
+          />
+          <label class="custom-control-label" for="gender-mme">Mme</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="langage">langage</label>
+        <select class="form-control" name="langage" id="langage">
+          <option value="MG">Malagasy</option>
+          <option value="FR">French</option>
+          <option value="EN">English</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <script src="../index.js"></script>
+    <script>
+      // Create an instance of the LightValidator
+      const myForm = new LightValidator("myForm", {
+        // option goes here
+      });
+
+      // Use validate() method to process validation
+      myForm.validate().then(data => {
+        console.log(data);
+      });
+
+      // If case you just need the validated datas
+      // It returns the validated and serialized form datas
+      const myFormDatas = myForm.validate();
+    </script>
+  </body>
+</html>
